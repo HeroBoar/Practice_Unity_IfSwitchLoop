@@ -10,28 +10,21 @@ public class practice5 : MonoBehaviour
     public float hp;
     public Text text,text1;
     public InputField water;
-    public int why;
-    public bool red;
     public GameObject cube;
     private int x = 1;
     private int y = 1;
-    public void CreateCube(int length, int width)
-    {
-        for (int i = 0; i < length; i++)
-        {
-            Instantiate(cube, new Vector3(i * 2, 0, 0), Quaternion.Euler(270, 0, 0));
-        }
-    }
-
-    private void Awake()
-    {
-        CreateCube(10,0);
-    }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        for (int i = 0; i < 10; i++)
+        {
+            for (int j = 0; j < (i + 1); j++)
+            {
+                Vector3 pos = new Vector3(i * 2, j * 2, 25);
+                Instantiate(cube, pos, Quaternion.identity);
+            }            
+        }
     }
 
     // Update is called once per frame
@@ -52,17 +45,7 @@ public class practice5 : MonoBehaviour
             text.text = "危險";
         }
 
-        switch (water.text)
-        {
-            case "紅水":
-                why = 0;
-                break;
-            case "藍水":
-                why = 1;
-                break;
-        }
-       
-        //red = (why = 0) ? text1.text = "恢復血量" : text1.text = "恢復魔力";
+        text1.text = water.text == "紅水" ? "恢復血量" : water.text == "藍水" ? "恢復魔力" : "";
 
     }
 }
